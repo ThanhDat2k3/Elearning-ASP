@@ -1,0 +1,74 @@
+#course-review .review-item {
+    padding: 25px 0;
+    border-bottom: 1px solid #d4d4d4;
+    width: 100%;
+}
+
+#course-review .rvi-user {
+    width: 45%;
+    display: inline-block;
+    vertical-align: top;
+}
+
+#course-review .rvi-content {
+    width: 54%;
+    display: inline-block;
+    vertical-align: top;
+}
+
+#course-review .rvi-user .rvi-image {
+    display: inline-block;
+    vertical-align: top;
+    width: 68px;
+    height: 68px;
+}
+
+#course-review .rvi-user .rvi-name {
+    display: inline-block;
+    vertical-align: top;
+    margin-left: 15px;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+#course-review .reviews-container {
+    font-size: 18px;
+    font-weight: 400;
+}
+
+.rvic-head {
+    display: block;
+}
+.rvi-star {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 15px;
+}
+
+.rvic-head span {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.rvic-title {
+    padding-left: 5px;
+    margin-top: 10px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    display: block;
+}
+
+.rvic-review {
+    display: block;
+    margin-top: 10px;
+    padding-left: 5px;
+}
+
+.rv-load {
+    margin-top: 25px;
+}
+
+.rv-loading {
+    text-align: center;
+    margin: 20px 0;
+}

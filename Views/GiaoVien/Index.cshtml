@@ -1,0 +1,1034 @@
+@using Elearning.Areas.Admin.Models;
+@using Elearning.Utilities;
+@model IList<vwTeacherInfo>;
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html dir="ltr" lang="vi" xml:lang="vi" xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://www.facebook.com/2008/fbml">
+
+<!-- Mirrored from hocmai.vn/giao-vien-noi-tieng.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 18 Oct 2025 02:44:23 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# hocmaivnonline: http://ogp.me/ns/fb/hocmaivnonline#">
+	<title>Đội ngũ giáo viên giỏi, nổi tiếng, nhiều kinh nghiệm giảng dạy, luyện thi của Hocmai.vn - HOCMAI</title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" type="text/css" href="theme/standard/stylesc676.css?forceconfig=new2" />
+<link rel="stylesheet" type="text/css" href="theme/new2/stylesc676.css?forceconfig=new2" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, shrink-to-fit=no" />
+	<meta name="description" content="Đội ngũ hàng trăm giáo viên giỏi, nhiều năm kinh nghiệm giảng dạy và luyện thi đến từ các trường THPT và đại học lớn là cơ sở cho việc đảm bảo chất lượng của Hocmai.vn" />
+    <meta name="keywords" content="Học trực tuyến, luyện thi, luyện thi trực tuyến, ôn thi đại học, luyện thi đại học, thi thử đại học, luyện thi cấp tốc, đề thi thử đại học" />
+	<meta name="robots" content="index, follow" />
+	<meta http-equiv="Expires" content="600" />
+    <meta name="author" content="Hocmai, Hanoi, Vietnam" />
+	<meta name="copyright" content="Hocmai, Hanoi, Vietnam" />
+    <meta name="email" content="webmaster@hocmai.vn" />
+    <meta property="fb:app_id" content="600873143331099" />
+    <meta property="fb:admins" content="619349115" />
+    	<meta property="og:description" name="description" content="Đội ngũ hàng trăm giáo viên giỏi, nhiều năm kinh nghiệm giảng dạy và luyện thi đến từ các trường THPT và đại học lớn là cơ sở cho việc đảm bảo chất lượng của Hocmai.vn" />
+	<meta property="og:site_name" content="Hocmai.vn"/>
+    <meta property="og:title" content="Đội ngũ giáo viên giỏi, nổi tiếng, nhiều kinh nghiệm giảng dạy, luyện thi của Hocmai.vn"/>
+	<meta property="og:url" content="giao-vien-noi-tieng.html"/>
+	<meta property="og:image" content="img/hocmai/logo_b_1200x630.png"/>
+	<meta property="og:type" content="article" />
+	    	<link href="https://plus.google.com/u/0/108703717734943342826" rel="author">
+        <link rel="shortcut icon" href="public/home/img/favicon.ico" />
+    <!--[if IE]>
+    <link href="/ie.css" rel="stylesheet" type="text/css" media="screen" />
+    <![endif]-->
+        <link href="plugins/jquery-ui/jquery-ui.min.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="theme/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="plugins/select2/select2.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="theme/new2/css/stylesdbba.css?v=3.4.21" rel="stylesheet" type="text/css" media="all" />
+
+    <link href="theme/new2/css/fw_qadbba.css?v=3.4.21" rel="stylesheet" type="text/css" media="all" />
+    <link href="theme/new2/css/responsivedbba.css?v=3.4.21" rel="stylesheet" type="text/css" media="all" />
+    <link href="theme/new2/css/loginv2dbba.css?v=3.4.21" rel="stylesheet" type="text/css" media="all" />
+    <link href="theme/new2/css/section-leveldbba.css?v=3.4.21" rel="stylesheet" type="text/css" media="all" />
+    <link href="theme/new2/css/course-groupdbba.css?v=3.4.21" rel="stylesheet" type="text/css" media="all" />
+    <link href="plugins/owlcarousel2/css/owl.carousel.min.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="plugins/owlcarousel2/css/owl.theme.default.min.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="fonts/roboto.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="fonts/tapviet.css" rel="stylesheet" type="text/css" media="all" />
+        <!--[if lt IE 9]>
+    <link href="https://hocmai.vn/theme/new2/css/ie8.css?v=3.4.21" rel="stylesheet" type="text/css" media="all" />
+    <![endif]-->
+    <script type="text/javascript" src="theme/new2/js/jquery-1.11.2.min.js"></script>
+    <script type="text/javascript" src="theme/new2/js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="plugins/jquery-ui/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="theme/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="plugins/validation/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="plugins/select2/select2.js"></script>
+    <script type="text/javascript" src="plugins/owlcarousel2/js/owl.carousel.min.js"></script>
+
+    
+<script type="text/javascript">
+    var HMClient = {
+        facebook: {
+            appId: '850534566732535',
+            scope: 'email,public_profile'
+        },
+        google: {
+            clientId: '880785099124-b2mb58bvfppe88kmq2ir8omld7g122c6.apps.googleusercontent.com',
+            scope: 'profile email'
+        },
+        yahoo: {
+            clientId: 'dj0yJmk9alFreDNnUFVyYkhiJmQ9WVdrOU0zRnVVemxwTjJzbWNHbzlNQS0tJnM9Y29uc3VtZXJzZWNyZXQmeD0zYg--'
+        }
+    };
+
+</script>    <script src="loginv2/social-login/js/libdbba.js?v=3.4.21" type="text/javascript"></script>
+
+    <script type="text/javascript" src="plugins/handlebars/handlebars.js"></script>
+
+    <script type="text/javascript" src="plugins/MathJax/MathJaxb198.js?config=TeX-MML-AM_CHTML"></script>
+    <script type="text/javascript" src="theme/new2/js/playerdbba.js?v=3.4.21"></script>
+    <script type="text/javascript" src="qa/asserts/js/qadbba.js?v=3.4.21"></script>
+    <script type="text/javascript" src="theme/new2/js/user-infodbba.js?v=3.4.21"></script>
+    <script type="text/javascript" src="theme/new2/js/scriptsdbba.js?v=3.4.21"></script>
+    <script type="text/javascript" src="theme/new2/js/cfldbba.js?v=3.4.21"></script>
+    <!-- <script type="text/javascript" src="https://hocmai.vn/qa/asserts/js/comments.js?v=3.4.21"></script> -->
+
+    <script type="text/javascript" src="theme/new2/js/notesdbba.js?v=3.4.21"></script>
+    <script type="text/javascript" src="theme/new2/js/mycoursedbba.js?v=3.4.21"></script>
+    <script type="text/javascript" src="theme/new2/js/loginv2dbba.js?v=3.4.21"></script>
+    <script type="text/javascript" src="theme/new2/js/section-leveldbba.js?v=3.4.21"></script>
+    <script id="qa-item" type="text/x-handlebars-template">
+    <li>
+        {{#ifCond type '==' 1 }}
+        <div class="row clearfix">
+            <div class="col-sm-2">
+                <span class="comment-time">{{time}}</span>
+            </div>
+            <div class="col-sm-10">
+        {{/ifCond}}
+        {{#ifCond type '==' 3 }}
+        <div class="row clearfix">
+            <div class="col-sm-1">
+                <span class="qa-profile-pic">{{{pix}}}</span>
+            </div>
+            <div class="col-sm-11">
+        {{/ifCond}}
+                <div class="comment" id="comment-{{id}}" text_comment="{{content}}">
+                    <p class="meta">
+                        <span class="author {{#if isT}}isteacher{{/if}}">{{author}}</span>
+                        <span class="time">{{created}}</span>
+                        <span class="view-qa"><a target="_blank" href="/qa/view.php?id={{id}}{{#if quiz}}&quiz={{quiz}}{{/if}}" data-id="{{id}}" data-scormid="{{scormid}}" data-type="{{type}}"><i class="fa fa-link" aria-hidden="true"></i></a></span>
+                    </p>
+                    <div class="content {{#unless isApprove}}removed{{/unless}}">
+                        <p>
+                            {{#if isApprove}}
+                            {{{content}}}
+                            {{else}}
+                            Nội dung vi phạm, đã bị ẩn bởi Hocmai.vn!
+                            {{/if}}
+                        </p>
+                    </div>
+                    <div class="actions">
+                        {{#if isApprove}}
+                        <a class="btnLike {{#if isQalike}}disabled{{/if}} {{#if guest}}notlogin{{/if}}" title="{{#if isQalike}}Bỏ thích{{else}}Thích{{/if}}" href="#like" scormid="{{scormid}}"  qaid="{{id}}"><span style="display: {{#if liked}}inline{{else}}none{{/if}};">{{liked}}</span> Thích</a>
+                        <a class="btnReply {{#if guest}}notlogin{{/if}}" href="#reply" scormid="{{scormid}}" replyto="{{id}}"><span>{{replies_count}}</span> Trả lời</a>
+                        {{#if isOwner}}
+                        {{else}}
+                        <a class="btnBookmark {{#if guest}}notlogin{{/if}}" href="#bookmark" scormid="{{scormid}}" qaid="{{id}}">{{#if isBookmark}}Bỏ theo dõi{{else}}Theo dõi{{/if}}</a>
+                        {{/if}}
+                        {{/if}}
+
+                        {{#if allowAction}}
+                        <a class="btnRepair" href="#repair" scormid="{{scormid}}" qaid="{{id}}">Sửa</a>
+                        {{/if}}
+
+                        {{#if isMod}}
+                        {{#ifCond status '!=' 2}}
+                        <a class="btnApprove {{#ifCond status '!=' 0}}approved{{/ifCond}}" href="#approve" scormid="{{scormid}}" qaid="{{id}}">{{#ifCond status '!=' 0}}Bỏ Duyệt{{/ifCond}}{{#ifCond status '==' 0}}Duyệt{{/ifCond}}</a>
+                        {{/ifCond}}
+                        {{#ifCond showProcessed '==' 1}}
+                        <a class="btnProcessed {{#ifCond aReply '==' 3}}processed{{/ifCond}}" href="#" scormid="{{scormid}}"
+                           qaid="{{id}}">
+                            <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+                            <span>{{#ifCond aReply '==' 3}}Đã xử lý{{/ifCond}}{{#ifCond aReply '==' 2}}Đánh dấu đã xử lý{{/ifCond}}</span>
+                        </a>
+                        {{/ifCond}}
+                        <!--<a class="btnDelete" href="#delete" scormid="{{scormid}}" qaid="{{id}}">Xóa</a>-->
+                        {{/if}}
+
+                        <a class="btnReport" href="#report" scormid="{{scormid}}" qaid="{{id}}">Báo cáo vi phạm</a>
+                    </div>
+                </div>
+                <ul class="comments" id="comments-{{id}}">
+                    {{#if replies_count}}
+                        {{#each replies}}
+                            <li>
+                                {{#ifCond reply.type '==' 3 }}
+                                <div class="row clearfix">
+                                    <div class="col-sm-1">
+                                        <span class="qa-profile-pic">{{{reply.pix}}}</span>
+                                    </div>
+                                    <div class="col-sm-11">
+                                {{/ifCond}}
+
+                                <div class="comment" id="comment-{{reply.id}}" text_comment="{{reply.content}}">
+                                    <p class="meta">
+                                        <span class="author">{{reply.author}}</span>
+                                        <span class="time">{{reply.created}}</span>
+                                    </p>
+                                    <div class="content">
+                                        <p>{{{reply.content}}}</p>
+                                    </div>
+                                    <div class="actions">
+                                        <a class="btnLike {{#ifCond qaliked '==' 1}}disabled{{/ifCond}} {{#if guest}}notlogin{{/if}}" title="{{#ifCond qaliked '==' 1}}Bỏ thích{{/ifCond}} {{#ifCond qaliked '!=' 1}}Thích{{/ifCond}} " href="#like" scormid="{{../scormid}}"  qaid="{{reply.id}}"><span style="display:{{#if reply.liked}}inline{{else}}none{{/if}};">{{reply.liked}}</span> Thích</a>
+                                        {{#ifCond isOwner '||' ../isMod}}
+                                        <a class="btnRepair" href="#repair" scormid="{{scormid}}" qaid="{{reply.id}}">Sửa</a>
+                                        {{/ifCond}}
+
+                                        {{#if ../isMod}}
+                                        <a class="btnApprove {{#ifCond reply.status '!=' 0}}approved{{/ifCond}}" href="#approve" scormid="{{../scormid}}" qaid="{{reply.id}}">{{#ifCond reply.status '!=' 0}}Bỏ Duyệt{{/ifCond}}{{#ifCond reply.status '==' 0}}Duyệt{{/ifCond}}</a>
+                                        <!--<a class="btnDelete" href="#delete" scormid="{{../scormid}}" qaid="{{reply.id}}">Xóa</a>-->
+                                        {{/if}}
+
+                                        <a class="btnReport" href="#report" scormid="{{../scormid}}" qaid="{{reply.id}}">Báo cáo vi phạm</a>
+                                    </div>
+                                </div>
+                                {{#ifCond reply.type '==' 3 }}
+                                    </div>
+                                </div>
+                                {{/ifCond}}
+                            </li>
+                        {{/each}}
+                    {{/if}}
+                    {{#ifCond replies_count '>' first_perpage}}
+                    <li class="more" qaid="{{id}}" scormid="{{scormid}}" page="1" style="margin-left: 0 !important;">Xem thêm {{remain}} trả lời</li>
+                    {{/ifCond}}
+                </ul>
+        {{#ifCond type '==' 1 }}
+            </div>
+        </div>
+        {{/ifCond}}
+        {{#ifCond type '==' 3 }}
+            </div>
+        </div>
+        {{/ifCond}}
+
+    </li>
+</script>
+
+<script id="qa-child-item" type="text/x-handlebars-template">
+    <li>
+        {{#ifCond type '==' 3 }}
+        <div class="row clearfix">
+            <div class="col-sm-1">
+                <span class="qa-profile-pic">{{{pix}}}</span>
+            </div>
+            <div class="col-sm-11">
+        {{/ifCond}}
+
+        <div class="comment" id="comment-{{id}}" text_comment="{{content}}">
+            <p class="meta">
+                <span class="author">{{author}}</span>
+                <span class="time">{{created}}</span>
+            </p>
+            <div class="content">
+                <p>{{{content}}}</p>
+            </div>
+            <div class="actions">
+                <a class="btnLike {{#if isQalike}}disabled{{/if}} {{#if guest}}notlogin{{/if}}" title="{{#if isQalike}}Bỏ thích{{else}}Thích{{/if}}" href="#like" scormid="{{scormid}}"  qaid="{{id}}"><span style="display:{{#if liked}}inline{{else}}none{{/if}};">{{liked}}</span> Thích</a>
+                {{#if allowAction}}
+                <a class="btnRepair" href="#repair" scormid="{{scormid}}" qaid="{{id}}">Sửa</a>
+                {{/if}}
+
+                {{#if isMod}}
+                <a class="btnApprove {{#ifCond status '!=' 0}}approved{{/ifCond}}" href="#approve" scormid="{{scormid}}" qaid="{{id}}">{{#ifCond status '!=' 0}}Bỏ Duyệt{{/ifCond}}{{#ifCond status '==' 0}}Duyệt{{/ifCond}}</a>
+                <!--<a class="btnDelete" href="#delete" scormid="{{scormid}}" qaid="{{id}}">Xóa</a>-->
+                {{/if}}
+
+                <a class="btnReport" href="#report" scormid="{{scormid}}" qaid="{{id}}">Báo cáo vi phạm</a>
+            </div>
+        </div>
+        {{#ifCond type '==' 3 }}
+            </div>
+        </div>
+        {{/ifCond}}
+    </li>
+</script>    
+<script language="JavaScript" type="text/javascript" src="lib/javascript-static.js"></script>
+<!--script language="JavaScript" type="text/javascript" src="https://hocmai.vn/lib/javascript-mod.php"></script-->
+<script language="JavaScript" type="text/javascript" src="lib/overlib.js"></script>
+<script language="JavaScript" type="text/javascript" src="lib/cookies.js"></script>
+
+<script language="JavaScript" type="text/javascript" defer="defer">
+
+<!-- // Non-Static Javascript functions
+
+//setTimeout('fix_column_widths()', 20);
+
+function openpopup(url,name,options,fullscreen) {
+  fullurl = "https://hocmai.vn" + url;
+  windowobj = window.open(fullurl,name,options);
+  if (fullscreen) {
+     windowobj.moveTo(0,0);
+     windowobj.resizeTo(screen.availWidth,screen.availHeight);
+  }
+  windowobj.focus();
+  return false;
+}
+
+function uncheckall() {
+  void(d=document);
+  void(el=d.getElementsByTagName('INPUT'));
+  for(i=0;i<el.length;i++)
+    void(el[i].checked=0)
+}
+
+function checkall() {
+  void(d=document);
+  void(el=d.getElementsByTagName('INPUT'));
+  for(i=0;i<el.length;i++)
+    void(el[i].checked=1)
+}
+
+function inserttext(text) {
+  text = ' ' + text + ' ';
+  if ( opener.document.forms['theform'].message.createTextRange && opener.document.forms['theform'].message.caretPos) {
+    var caretPos = opener.document.forms['theform'].message.caretPos;
+    caretPos.text = caretPos.text.charAt(caretPos.text.length - 1) == ' ' ? text + ' ' : text;
+  } else {
+    opener.document.forms['theform'].message.value  += text;
+  }
+  opener.document.forms['theform'].message.focus();
+}
+
+
+// done hiding -->
+</script>
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'../www.googletagmanager.com/gtm5445.html?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-MS3HVL4');</script>
+<!-- End Google Tag Manager -->
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-T5W79TC0RG"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-T5W79TC0RG');
+</script>
+
+    <script type="text/javascript">
+    <!--
+    	$j = jQuery;
+    -->
+    </script>
+
+            </head>
+<body  class="giao-vien-noi course-1 lang-vi_utf8" id="giao-vien-noi-tieng.html">
+<div id="fb-root"></div>
+<div id="page">
+
+    <style type="text/css">
+        .reserve-wrapper, .reserve-wrapper-2, .reserve-wrapper-3 {
+            height: 0px;
+            width: 100%;
+            background-color: #009bff;
+            text-align: center;
+            padding: 0;
+            position: relative;
+            z-index: 20;
+            margin: 0 0 10px;
+            opacity: 0;
+            visibility: hidden;
+            display: none;
+        }
+
+        .reserve-wrapper::before {
+            content: "";
+            display: block;
+            height: 40px;
+            left: 5px;
+            position: absolute;
+            top: 0;
+            width: 338px;
+        }
+
+        .reserve-wrapper-2:before {
+            line-height: 40px;
+            content: "HOC THỬ MIỄN PHÍ PEN-I >>";
+            display: block;
+            height: 40px;
+            left: 5px;
+            position: absolute;
+            top: 0;
+            width: 338px;
+            color: white;
+            font-weight: bold;
+            font-size: 22px;
+        }
+
+        .reserve-wrapper:before {
+            line-height: 40px;
+            content: "ĐẶT CHỖ NỀN TẢNG 2018 >>";
+            display: block;
+            height: 40px;
+            left: 5px;
+            position: absolute;
+            top: 0;
+            width: 338px;
+            color: white;
+            font-weight: bold;
+            font-size: 22px;
+        }
+
+        .reserve-pen {
+            max-width: 670px;
+            margin: 0 auto;
+            color: #ffffff;
+        }
+
+        .reserve-wrapper-2 .reserve-pen, .reserve-wrapper-3 .reserve-pen {
+            max-width: 700px;
+        }
+
+        .reserve-wrapper-2 .reserve-pen ul li, .reserve-wrapper-3 .reserve-pen ul li {
+            width: 220px;
+            float: left;
+        }
+
+        .reserve-pen ul {
+            list-style: none;
+            padding: 0;
+            padding-left: 30px;
+        }
+
+        .reserve-pen ul li {
+            width: 160px;
+            float: left;
+        }
+
+        .reserve-pen ul li .step {
+            display: block;
+            height: 40px;
+            padding: 8px 0;
+            line-height: 24px;
+            position: relative;
+        }
+
+        .reserve-pen ul li .step .step-number {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            border: 2px solid white;
+            border-radius: 29px;
+            left: -20px;
+            top: 0;
+            z-index: 4;
+            line-height: 36px;
+            font-size: 14px;
+            background-color: #009bff;
+
+        }
+
+        .reserve-pen ul li .step-content {
+            position: relative;
+            display: block;
+            overflow-y: hidden;
+            padding-left: 12px;
+            font-size: 16px;
+        }
+
+        .reserve-pen ul li .step-content:before {
+            position: absolute;
+            height: 0;
+            width: 0;
+            content: '';
+            top: 50%;
+            left: 12px;
+            margin-top: -28px;
+            border-left: 16px solid white;
+            border-bottom: 28px solid transparent;
+            border-top: 28px solid transparent;
+            z-index: 1;
+        }
+
+        .reserve-pen ul li .step-content:after {
+            position: absolute;
+            height: 0;
+            width: 0;
+            content: '';
+            top: 50%;
+            left: 10px;
+            margin-top: -28px;
+            border-left: 16px solid #009bff;
+            border-bottom: 28px solid transparent;
+            border-top: 28px solid transparent;
+            z-index: 2;
+        }
+
+        .reserve-pen ul li.active {
+            background-color: #fd9e00;
+            color: white;
+        }
+
+        .reserve-pen ul li.active .step:before {
+            content: '!';
+            height: 16px;
+            width: 16px;
+            line-height: 16px;
+            font-size: 12px;
+            font-weight: 500;
+            border-radius: 5px;
+            position: absolute;
+            top: 3px;
+            left: -25px;
+            z-index: 10;
+            background-color: #fd9e00;
+        }
+
+        .reserve-pen ul li.active .step .step-number {
+            background-color: #009bff;
+            border-color: #ffffff;
+        }
+
+        .reserve-pen ul li.active .step-content:before {
+            border-left-color: #ffffff;
+        }
+
+        .reserve-pen ul li.active .step-content:after {
+            border-left-color: #fd9e00;
+        }
+
+        .stickyTop {
+            position: fixed;
+            z-index: 999;
+            width: 100%;
+            top: 0;
+            left: 0;
+        }
+
+        .show-bar {
+            height: 40px;
+            opacity: 1;
+            display: block;
+            visibility: visible;
+            -webkit-transition: height 0s, opacity 1s,  visibility 1s;
+            transition: height 0s, opacity 1s,  visibility 1s;
+        }
+
+        @@media only screen and  (max-width: 1200px){
+            .reserve-wrapper:before {
+                display: none;
+            }
+        }
+
+        @@media only screen and  (max-width: 768px){
+            .reserve-wrapper:before, .reserve-wrapper-2:before .reserve-wrapper-3:before{
+                display: none;
+            }
+
+            .reserve-pen {
+                max-width: 390px;
+            }
+
+            .reserve-pen ul {
+                padding-left: 40px;
+                text-align: center;
+            }
+
+            .reserve-pen ul li {
+                float: none;
+                width: 60px;
+                display: inline-block;
+            }
+
+            .reserve-pen ul li.active {
+                width: 150px;
+            }
+
+            .reserve-pen ul li.active .step-content {
+                font-size: 14px;
+                color: #ffffff;
+            }
+
+            .reserve-pen ul li .step-content {
+                font-size: 1px;
+                color: #009bff;
+            }
+
+            .reserve-pen ul li.active .step:before {
+                top: -3px;
+                left: -20px;
+            }
+        }
+
+        @@media only screen and  (max-width: 480px){
+            .reserve-pen ul {
+                padding-left: 40px;
+            }
+
+            .reserve-pen ul li {
+                width: 46px;
+            }
+
+            .reserve-pen ul li.active {
+                width: 130px;
+            }
+
+            .reserve-pen ul li.active .step-content {
+                font-size: 14px;
+                color: #ffffff;
+            }
+
+            .reserve-pen ul li .step-content {
+                font-size: 1px;
+                color: #009bff;
+            }
+
+            .reserve-pen ul li.active .step:before {
+                top: -3px;
+                left: -20px;
+            }
+        }
+    </style>
+        
+    
+
+
+
+
+
+<link rel="stylesheet" href="home_page/giaovien/css/giaovienef15.css?v=1.9.5"/>
+<script type="text/javascript" src="home_page/giaovien/js/scriptsef15.js?v=1.9.5"></script>
+<!--<div id="breadcrumb-wr">-->
+<!--    <div class="wrapper">-->
+<!--        <div class="breadcrumbs" id="breadcrumbs">-->
+<!--            <a href="/" class="home-1-icon">Trang chủ</a> &gt; Giáo viên</div>-->
+<!--    </div>-->
+<!--</div>-->
+<div class="gv-highlight">
+    <div class="gv-wrap">
+<!--        <h1>Giáo viên của chúng tôi</h1>-->
+<!--        <p><strong>Giáo viên của HOCMAI là những người “đứng sau màn hình” với trách nhiệm truyền lửa, truyền cảm hứng cho học sinh qua từng bài giảng trực tuyến thiết thực và có ý nghĩa. Họ không chỉ cần có chuyên môn giỏi mà còn phải có đủ niềm đam mê và năng lực để hỗ trợ học sinh từ những câu hỏi trao đổi bài đến giải đáp, củng cố niềm tin cho người học vươn tới những ước mơ. Họ xứng đáng được nhận danh hiệu là những nhà giáo tiên phong kết nối giáo dục truyền thống và hiện đại.</strong></p>-->
+<!--        <a href="#main" class="gv-goto" data-scroll="main"></a>-->
+    </div>
+</div>
+
+<div id="main" data-anchor="main">
+    <div class="wrapper">
+        <div class="gv-top clearfix">
+                        <form method="POST" id="filterForm" action="https://hocmai.vn/giao-vien-noi-tieng.html#main">
+                <div class="gv-select">
+                    <select id="gv-subject-filter" name="subject" class="select2">
+                        <option value="">Chọn môn</option>
+                                                <option  value="42">Tiếng Việt</option>
+                                                <option  value="28">Ngữ văn</option>
+                                                <option  value="27">Toán</option>
+                                                <option  value="22">Tiếng Anh</option>
+                                                <option  value="29">Vật lí</option>
+                                                <option  value="18">Hóa học</option>
+                                                <option  value="24">Sinh học</option>
+                                                <option  value="23">Lịch sử</option>
+                                                <option  value="16">Địa lí</option>
+                                                <option  value="17">GDKT&PL</option>
+                                                <option  value="49">Đọc hiểu</option>
+                                                <option  value="50">Tư duy TĐS</option>
+                                                <option  value="26">Tin học</option>
+                                            </select>
+                    <select name="class" id="gv-class-filter" class="select2">
+                        <option value="">Chọn lớp</option>
+                                                    <option value="2" >Lớp 3</option>
+                                                    <option value="3" >Lớp 4</option>
+                                                    <option value="4" >Lớp 5</option>
+                                                    <option value="5" >Lớp 6</option>
+                                                    <option value="6" >Lớp 7</option>
+                                                    <option value="7" >Lớp 8</option>
+                                                    <option value="8" >Lớp 9</option>
+                                                    <option value="9" >Lớp 10</option>
+                                                    <option value="10" >Lớp 11</option>
+                                                    <option value="11" >Lớp 12</option>
+                                            </select>
+                </div>
+                <div class="gv-search">
+                    <span class="gv-glass"></span>
+                    <input type="text" name="search" class="gv-search-input" value="" placeholder="Tìm kiếm ...">
+                    <input type="submit" name="submit" class="gv-search-btn" id="btnSearchGv" value="Tìm kiếm">
+                </div>
+            </form>
+        </div>
+        @await Component.InvokeAsync("ChiTietGiaoVien")
+
+        <div class="gv-bottom clearfix">
+            <div class="gv-pagination">
+                <div class="paging">Trang:&nbsp;&nbsp;<a href="#" class="gv-curpage">1</a>&nbsp;&nbsp;<a href="giao-vien-noi-tieng2679.html?page=1">2</a>&nbsp;&nbsp;<a href="giao-vien-noi-tieng4658.html?page=2">3</a>&nbsp;&nbsp;<a href="giao-vien-noi-tieng9ba9.html?page=3">4</a>&nbsp;&nbsp;<a href="giao-vien-noi-tiengfdb0.html?page=4">5</a>&nbsp;&nbsp;<a href="giao-vien-noi-tiengaf4d.html?page=5">6</a>&nbsp;&nbsp;<a href="giao-vien-noi-tiengc575.html?page=6">7</a>&nbsp;&nbsp;<a href="giao-vien-noi-tieng235c.html?page=7">8</a>&nbsp;&nbsp;<a href="giao-vien-noi-tiengfdfa.html?page=8">9</a>&nbsp;&nbsp;<a href="giao-vien-noi-tieng0b08.html?page=9">10</a>&nbsp;&nbsp;<a href="giao-vien-noi-tieng1448.html?page=10">11</a>&nbsp;&nbsp;<a href="giao-vien-noi-tieng1c8b.html?page=11">12</a>&nbsp;&nbsp;<a href="giao-vien-noi-tiengce37.html?page=12">13</a>&nbsp;&nbsp;<a href="giao-vien-noi-tieng8c93.html?page=13">14</a>&nbsp;&nbsp;<a href="giao-vien-noi-tienga7f1.html?page=14">15</a>&nbsp;&nbsp;<a href="giao-vien-noi-tieng5760.html?page=15">16</a>&nbsp;&nbsp;<a href="giao-vien-noi-tieng42a7.html?page=16">17</a>&nbsp;&nbsp;<a href="giao-vien-noi-tieng5c43.html?page=17">18</a>&nbsp;...<a href="giao-vien-noi-tieng7537.html?page=19">20</a>&nbsp;<a href="giao-vien-noi-tieng2679.html?page=1" class="gv-pagenav">Tiếp theo</a></div>            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+</div>
+<div class="modal hocmai-modal fade" id="changeThemeModal" tabindex="-1" role="dialog" aria-labelledby="changeThemeModalTitle" aria-hidden="true">
+    <div class="modal-dialog" style="width: 450px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="changeThemeModalTitle">Xác nhận</h4>
+            </div>
+            <div class="modal-body">
+                <div class="warning-des">Vui lòng xác nhận sử dụng giao diện cũ của Hocmai.vn</div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-cancel" data-dismiss="modal">Bỏ qua</button>
+                <button id="changethemehocmai" type="button" class="btn btn-primary" data-dismiss="modal">Đồng ý</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal hocmai-modal fade" id="errorVideoModal" tabindex="-1" role="dialog" aria-labelledby="errorVideoModalTitle" aria-hidden="true">
+    <div class="modal-dialog" style="width: 450px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="errorVideoModalTitle">Thông báo</h4>
+            </div>
+            <div class="modal-body">
+                <div class="warning-des">Đã có lỗi xảy ra trong quá trình xem video bài giảng. Vui lòng thử lại sau 17h00phút</div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-cancel" data-dismiss="modal">Đóng</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal hocmai-modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalTitle" aria-hidden="true">
+    <div class="modal-dialog" style="">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="loginModalTitle">đăng nhập</h4>
+            </div>
+            <div class="modal-body">
+                <form id="login" name="login" method="post" action="https://hocmai.vn/loginv2/index.php">
+                    <div class="alertMsg"></div>
+                    <div class="clearfix">
+                        <div class="login-element-wr input-username">
+                            <input type="text" class="edit-login" size="30" name="username" placeholder="Tên đăng nhập"/>
+                        </div>
+                        <div class="login-element-wr input-password">
+                            <input type="password" id="realpass" size="30" name="password" class="edit-login" placeholder="Mật khẩu"/>
+                        </div>
+                        <div class="clearfix">
+                            <div class="login-actions">
+                                <input type="hidden" id="a" value="https://hocmai.vn/giao-vien-noi-tieng.html" name="a"/>
+                                <input type="hidden" id="testcookies" value="1" name="testcookies"/>
+                                <div class="login-actions-left" style="display: none;">
+                                    <div class="checkbox">
+                                        <input type="checkbox" class="chkRemember" name="remember" value="1" style="margin-left: -20px;">
+                                        <label><span>Ghi nhớ</span></label>
+                                    </div>
+                                </div>
+                                <div class="login-actions-right">
+                                    <input type="submit" class="btn-login" value="Đăng nhập"/>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="login-action-sub">
+                                <ul>
+                                    <li><a target="_blank" href="loginv2/signup4121.html?a=https://hocmai.vn/giao-vien-noi-tieng.html" class="login-register">Đăng ký</a></li>
+                                    <li><a class="login-forgot" target="_blank" href="loginv2/forgot_password.html">Quên mật khẩu?</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <div class="login-social">
+                    <ul>
+                        <li class="fb-social" data-name="facebook"><a href="login/index0f0c.html?&amp;miniLogin=facebook" class="blue-tooltip" data-toggle="tooltip" title="Đăng nhập bằng facebook"></a></li>
+                        <li class="google-social" data-name="google"><a href="https://accounts.google.com/o/oauth2/auth?response_type=code&amp;access_type=online&amp;client_id=880785099124-b2mb58bvfppe88kmq2ir8omld7g122c6.apps.googleusercontent.com&amp;redirect_uri=https%3A%2F%2Fhocmai.vn%2Flogin%2FloginGoogle2.php&amp;state&amp;scope=profile%20email&amp;approval_prompt=auto" class="blue-tooltip" data-toggle="tooltip" title="Đăng nhập bằng google"></a></li>
+                        <li class="yahoo-social" data-name="yahoo"><a href="login/index4ff1.html?&amp;miniLogin=openid&amp;auth=yahoo" class="blue-tooltip" data-toggle="tooltip" title="Đăng nhập bằng yahoo"></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal hocmai-modal fade" id="fbConfirmModal" role="dialog" aria-labelledby="fbConfirmModalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="fbConfirmModalTitle">Tham gia group khóa học "20h tán đổ môn Hóa"</h4>
+            </div>
+            <div class="modal-body">
+                <form id="fb-confirm-form" class="confirm-form" name="uicf" method="POST" action="https://hocmai.vn/user/fb-confirm.php">
+                    <div>
+                        <p>Group "<a href="https://www.facebook.com/groups/hoa.thayledangkhuong.hocmai/" target="_blank">Chinh phục điểm cao môn Hoá</a>" chỉ dành cho học sinh đã đăng kí khoá học và là nơi để Bạn thực hành, trao đổi bài tập trong khoá học với thầy Lê Đăng Khương. Bạn cần làm theo 2 bước sau để tham gia group:</p>
+                        <p><strong>Bước 1</strong>: Kết bạn với tài khoản <a href="https://www.facebook.com/hocsinhcap3" target="_blank">HS Hocmai</a></p>
+                        <p><strong>Bước 2</strong>: Gửi Tin nhắn tới tài khoản <a href="https://www.facebook.com/hocsinhcap3" target="_blank">HS Hocmai</a> với nội dung: <br/><br/><i>Em đã đăng kí khoá PEN-C/PEN-I thầy Lê Đăng Khương, tài khoản đăng kí khoá học của em là....</i></p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal hocmai-modal fade" id="testTrialModal" role="dialog" aria-labelledby="testTrialModalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="testTrialModalTitle">Đặt chỗ PEN-I giảm 30% học phí</h4>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <p>- Ưu đãi <strong style="color: red">30%</strong> học phí PEN-I dành riêng cho bạn</p>
+                    <p>- Thời gian: Chỉ đến hết <strong style="color: red">4/12/2015</strong></p>
+                </div>
+                <div class="dc-btn-wrapper">
+                    <a class="btn btn-primary" href="su-kien/dat-cho-pen-i/index3c73.html?utm_source=course-pop-up&amp;utm_medium=pop-up&amp;utm_campaign=DC-PEN-I-2016">Đặt chỗ ngay</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal hocmai-modal fade" id="messageModal" tabindex="-1" role="dialog" aria-labelledby="messageModalTitle" aria-hidden="true">
+    <div class="modal-dialog" style="max-width: 450px; width: 100%">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="messageModalTitle">Thông báo</h4>
+            </div>
+            <div class="modal-body">
+                <div class="warning-des"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-cancel" data-dismiss="modal">Đóng</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="loginSocialModal" tabindex="-1" role="dialog" aria-labelledby="loginSocialTitle" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="loaderv2">
+                    <img src="theme/new2/images/ajax-loader.gif" alt="">
+                    <p class="loaderv2-text">Bạn đang đăng nhập. Vui lòng chờ trong giây lát.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="viewQAModal" tabindex="-1" role="dialog" aria-labelledby="viewQAModalTitle" aria-hidden="true">
+    <div class="modal-dialog" style="max-width: 600px; width: 100%">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <div class="view-scorm-comments" id="scorm-comments-view" data-toggle="comments" data-action="auto">
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-cancel" data-dismiss="modal">Đóng</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="sectionLevelModal" tabindex="-1" role="dialog" aria-labelledby="sectionLevelTitle" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body"></div>
+        </div>
+    </div>
+</div>
+<div class="modal hocmai-modal fade" id="registerPackageModal" tabindex="-1" role="dialog" aria-labelledby="registerPackageTitlte" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Hocmai</h4>
+            </div>
+            <div class="modal-body">
+                <p class="rp-message">Bạn cần <strong>ĐĂNG KÝ</strong> khóa học này để tham gia làm bài "Đánh giá năng lực"!</p>
+                <div class="rp-btn">
+                    <a href="#" class="course-register-now">Đăng ký ngay</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="WapperPopupTestPenI"></div>
+
+<!--<script type="text/javascript" src="/xac-nhan-chuyen-tien/warning.php"></script>-->
+
+<script>
+    /* Tìm và hiển thị popUp được gán trên thân trang */
+    /* jQuery(document).ready(function(){
+        var popupStateCookie = $.cookie("popup032020");
+        if(!popupStateCookie){
+            $('.popupBN').addClass('show');
+            $('.popupMask').addClass('show');
+        }
+
+        $('.popupClose').click(function(){
+            $('.popupBN').removeClass('show');
+            $('.popupMask').removeClass('show');
+            $.cookie("popup032020", "1", { expires: 3 });
+        })
+    }); */
+</script>
+<div style="position: absolute; z-index: -100; bottom: 0;">
+	<!-- Google Code dành cho Thẻ tiếp thị lại -->
+	<!--------------------------------------------------
+	Không thể liên kết thẻ tiếp thị lại với thông tin nhận dạng cá nhân hay đặt thẻ tiếp thị lại trên các trang có liên quan đến danh mục nhạy cảm. Xem thêm thông tin và hướng dẫn về cách thiết lập thẻ trên: http://google.com/ads/remarketingsetup
+	--------------------------------------------------->
+	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({"gtm.start":
+	new Date().getTime(),event:"gtm.js"});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!="dataLayer"?"&l="+l:";j.async=true;j.src=
+	"https://www.googletagmanager.com/gtm.js?id="+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,"script","dataLayer","GTM-MS3HVL4");</script>
+	<!-- End Google Tag Manager -->
+	
+	<script type="text/javascript">
+	/* <![CDATA[ */
+	var google_conversion_id = 995740040;
+	var google_custom_params = window.google_tag_params;
+	var google_remarketing_only = true;
+	/* ]]> */
+	</script>
+	<script type="text/javascript" src="../www.googleadservices.com/pagead/f.txt">
+	</script>
+	<!-- Google Tag Manager (noscript) -->
+	<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MS3HVL4"
+	height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+	<!-- End Google Tag Manager (noscript) -->
+	<noscript>
+	<div style="display:inline;">
+	<img height="1" width="1" style="border-style:none;" alt="" src="http://googleads.g.doubleclick.net/pagead/viewthroughconversion/995740040/?value=0&amp;guid=ON&amp;script=0"/>
+	</div>
+	</noscript> </div>
+                    <script type="text/javascript">
+                        var pageTracker;
+                        var gaJsHost = (("https:" == document.location.protocol) ? "https://" : "http://");
+                    
+                        function gaInit () {
+                            try {
+                                pageTracker = _gat._createTracker("UA-2509692-1");
+                                pageTracker._initData();
+                                var pluginUrl = "../www.google-analytics.com/plugins/ga/inpage_linkid.js";
+                                _gaq.push(["_require", "inpage_linkid", pluginUrl]);
+                                pageTracker._trackPageview();
+                                jQuery.event.trigger({
+                                    type: "gaInit",
+                                    message: "Google analytics loaded!",
+                                });
+                                
+                            } catch(err) {}
+                        }
+                    
+                        jQuery(window).load(function() {
+                            jQuery.ajax({
+                                url: gaJsHost+"google-analytics.com/ga.js", type: "get", dataType: "script", cache: true,
+                                timeout: 5000,
+                                success: gaInit,
+                                error: function() {
+                                    jQuery.ajax({
+                                        url: gaJsHost+"stats.g.doubleclick.net/dc.js", type: "get", dataType: "script", cache: true,
+                                        success: gaInit
+                                    });
+                                }
+                            });
+                        });
+                    </script>
+                    <!-- Facebook Pixel Code -->
+                    <script>
+                    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+                    n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+                    n.push=n;n.loaded=!0;n.version="2.0";n.queue=[];t=b.createElement(e);t.async=!0;
+                    t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+                    document,"script","../connect.facebook.net/en_US/fbevents.js");
+                
+                
+                    <!-- Facebook Pixel Code -->
+                    fbq("init", "296844728819026");
+                    <!-- Facebook Pixel Code THCS -->
+                    fbq("init", "880291722070865", {em: "insert_email_variable"});
+                    <!-- Facebook Pixel Code THPT -->
+                    fbq("init", "436790669862559", {em: "insert_email_variable"});
+                    <!-- Facebook Pixel Code THPT 2 -->
+                    fbq("init", "930231243801930", {em: "insert_email_variable"});
+                     <!-- Facebook Pixel Code THPT 3 -->
+                    fbq("init", "135587831735181", {em: "insert_email_variable"});
+                    fbq("init", "910233166528946");
+
+                    fbq("track", "PageView");
+                    
+                    </script>
+                
+                    <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=910233166528946&amp;ev=PageView&amp;noscript=1"/></noscript>
+                	<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=135587831735181&amp;ev=PageView&amp;noscript=1"/></noscript>
+                    <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=880291722070865&amp;ev=PageView&amp;noscript=1"/></noscript>
+                    <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=436790669862559&amp;ev=PageView&amp;noscript=1" /></noscript>
+                    <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=930231243801930&amp;ev=PageView&amp;noscript=1" /></noscript>
+                    <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=296844728819026&amp;ev=PageView&amp;noscript=1" /></noscript>
+                    <!-- End Facebook Pixel Code -->
+                    
+                    <script>
+                        (function(h,o,t,j,a,r){
+                        h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+                        h._hjSettings={hjid:239700,hjsv:6};
+                        a=o.getElementsByTagName('head')[0];
+                        r=o.createElement('script');r.async=1;
+                        r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+                        a.appendChild(r);
+                        })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+                    </script>
+                    <script src="https://chat-plugin.pancake.vn/main/auto?page_id=web_hocmai"></script><script type="text/javascript">
+    <!--
+    (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "../connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v2.3";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+    -->
+    hocmaiSELoginMethod = 'HOCMAI';
+</script>
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+<script>
+    window.onGoogleLibraryLoad = function () {
+        google.accounts.id.initialize({
+            client_id: '880785099124-b2mb58bvfppe88kmq2ir8omld7g122c6.apps.googleusercontent.com',
+            callback: handleOnetapResponse
+        });
+        google.accounts.id.prompt();
+    }
+
+    function handleOnetapResponse(response) {
+        $.post( "loginv2/social-login/google-onetap.html", { "id_token" : response.credential },
+            function(data) {
+                console.log(data.status);
+                if (data.status == "success") {
+                    if (data.url != '') {
+                        window.location.href = data.url;
+                    }else{
+                        location.reload();
+                    }
+                }
+            }, "json");
+    }
+</script>
+</body>
+
+<!-- Mirrored from hocmai.vn/giao-vien-noi-tieng.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 18 Oct 2025 02:45:07 GMT -->
+</html><!-- Execution took 0.235715 seconds, 2.75 MB -->

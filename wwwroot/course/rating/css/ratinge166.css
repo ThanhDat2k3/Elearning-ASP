@@ -1,0 +1,116 @@
+/*my style*/
+.rating-modal .rating-course {
+    font-size: 13px;
+}
+
+.rating-modal .rating-course .rating {
+    margin-bottom: 20px;
+}
+.rating-modal .rating-course .star-rating {
+    display: inline-block;
+    margin-left: 10px;
+}
+.rating-modal .rating-course .review-hint ul {
+    padding-left: 15px;
+}
+
+.rating-modal .rating-course .control-mwr {
+    float: none;
+    width: 100%;
+}
+
+.rating-modal .control-mwr .edit-login {
+    border-radius: 0;
+    width: 100%;
+}
+
+.rating-modal .reg-submit {
+    width: auto;
+    min-width: 125px;
+}
+
+.course-rate-container {
+    display: block;
+    width: 100%;
+    padding-top: 30px;
+    border-bottom: 1px solid #d4d4d4;
+    padding-bottom: 30px;
+    font-size: 18px;
+
+}
+
+.detail-rate {
+    width: 54%;
+    display: inline-block;
+}
+
+#course-rate-count .progress {
+    display: inline-block;
+    width: 200px;
+    height: 20px;
+    vertical-align: middle;
+    margin: 0 15px;
+    border-radius: 3px;
+    background-color: rgb(200, 200, 200);
+}
+
+#course-rate-count .progress-bar {
+    background-color: rgb(243, 156, 18);
+}
+
+#course-rate-count ul li {
+    margin: 10px 0;
+}
+
+.average-score {
+    font-size: 100px;
+    color: rgb(243, 156, 18);
+}
+
+
+#course-rate-count .average-rate {
+    width: 45%;
+    display: inline-block;
+    vertical-align: top;
+}
+
+#course-rate-count .average-rate .title p {
+    font-weight: 500;
+    margin: 0;
+}
+
+
+
+#course-rate-count .rate-title {
+    font-size: 18px;
+    margin-top: 16px;
+    font-weight: 500;
+    padding-left: 5px;
+}
+
+#course-rate-count ul {
+    list-style: none;
+    padding-left: 20px;
+}
+
+#course-rate-count ul>li {
+    font-size: 10px;
+    height: 22px;
+    font-weight: 500;
+}
+
+#course-rate-count .crc-title .count {
+    color: #ADADAD;
+}
+
+#course-rate-count ul>li span {
+    font-size: 18px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.rating-star-count {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 8px;
+}

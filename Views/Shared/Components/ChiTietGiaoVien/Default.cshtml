@@ -1,0 +1,28 @@
+@using Elearning.Areas.Admin.Models;
+@using Elearning.Utilities;
+@model IList<vwTeacherInfo>
+<ul class="gv-list clearfix">
+    @{
+        var gv=Model.Take(8).ToList();
+        foreach (var i in gv)
+        {
+            string url= Functions.GiaoVienSlugGeneration("gv",i.TeacherId,i.TenGiangVien);
+             <li class="gv-item-wr">
+                <div class="gv-item">
+                    <div class="gv-image"><a href="/@url" target="_blank"><img src="@i.AnhDaiDien" alt="@i.TenGiangVien"/></a></div>
+                    <div class="gv-caption">
+                        <p class="gv-name"><a href="/@url" target="_blank">@i.TenGiangVien</a></p>
+                        <p class="gv-school">@i.NoiCongTac</p>
+                        <div class="gv-desc">
+                            <p style="text-align:justify">@i.GioiThieu</p>
+                        </div>
+                    </div>
+                    <div class="gv-viewmore"><a href="/@url" target="_blank">Chi tiết</a></div>
+                </div>
+            </li>
+        }
+    }
+   
+    
+                        
+</ul>
