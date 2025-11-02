@@ -23,7 +23,13 @@ namespace Elearning.Areas.Admin.Controllers
         public IActionResult Index()
         {
             var teacher = new Teacher();
-             return View(teacher);
+            return View(teacher);
         }
+        public IActionResult Create()
+        {
+            var teacher = new Teacher();
+            return View(teacher);
+        }
+
     }
 }
