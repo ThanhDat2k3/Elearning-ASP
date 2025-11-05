@@ -1,0 +1,66 @@
+@using Elearning.Areas.Admin.Models
+@model Teacher
+
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<main id="main" class="main">
+    <div class="pagetitle">
+        <h2>Xác nhận vô hiệu hóa giáo viên</h2>
+    </div>
+
+    <section class="section">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title text-danger">Bạn có chắc muốn vô hiệu hóa giáo viên này?</h5>
+                        <p class="text-muted">Hành động này sẽ đặt IsActive = false cho User liên quan. Dữ liệu giáo viên sẽ không bị xóa.</p>
+
+                        <div class="row mb-3">
+                            <div class="col-sm-4 text-center">
+                                <img src="@(!string.IsNullOrEmpty(Model.AnhDaiDien) ? Model.AnhDaiDien : Url.Content("~/images/no-avatar.png"))" class="img-fluid rounded" alt="Ảnh đại diện" />
+                            </div>
+                            <div class="col-sm-8">
+                                <dl class="row">
+                                    <dt class="col-sm-4">Họ và tên</dt>
+                                    <dd class="col-sm-8">@Model.User?.FullName ?? Model.Email ?? "Không có tên"</dd>
+
+                                    <dt class="col-sm-4">TeacherId</dt>
+                                    <dd class="col-sm-8">@Model.TeacherId</dd>
+
+                                    <dt class="col-sm-4">UserId</dt>
+                                    <dd class="col-sm-8">@Model.UserId</dd>
+
+                                    <dt class="col-sm-4">Nơi công tác</dt>
+                                    <dd class="col-sm-8">@Model.NoiCongTac ?? "-"</dd>
+
+                                    <dt class="col-sm-4">Email</dt>
+                                    <dd class="col-sm-8">@(!string.IsNullOrEmpty(Model.Email) ? Model.Email : Model.User?.Email ?? "-")</dd>
+
+                                    <dt class="col-sm-4">Trạng thái hiện tại</dt>
+                                    <dd class="col-sm-8">@(Model.User != null ? (Model.User.IsActive == false ? "Inactive" : "Active") : "Unknown")</dd>
+                                </dl>
+                            </div>
+                        </div>
+
+                        <form asp-area="Admin" asp-controller="GiaoVien" asp-action="DeleteConfirmed" method="post">
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="id" value="@Model.TeacherId" />
+                            <div class="d-flex">
+                                <button type="submit" class="btn btn-danger me-2">
+                                    <i class="bi bi-trash"></i> Xác nhận vô hiệu hóa
+                                </button>
+                                <a asp-area="Admin" asp-controller="GiaoVien" asp-action="Index" class="btn btn-secondary">
+                                    Hủy và quay lại
+                                </a>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>

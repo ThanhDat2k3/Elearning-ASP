@@ -1,0 +1,141 @@
+@using Elearning.Areas.Admin.Models
+@model Teacher
+
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<main id="main" class="main">
+    <div class="pagetitle">
+        <h2>Chi tiết giáo viên</h2>
+    </div>
+
+    <div class="mb-3">
+        <a asp-area="Admin" asp-controller="GiaoVien" asp-action="Index" class="btn btn-secondary">
+            <i class="bi bi-list"></i> Danh sách
+        </a>
+
+        <button id="editBtn" type="button" class="btn btn-primary" onclick="enableEdit()">
+            <i class="bi bi-pencil"></i> Chỉnh sửa
+        </button>
+
+        <a asp-area="Admin" asp-controller="GiaoVien" asp-action="Delete" asp-route-id="@Model.TeacherId" class="btn btn-danger">
+            <i class="bi bi-trash"></i> Vô hiệu hóa
+        </a>
+    </div>
+
+    <section class="section">
+        <div class="row">
+            <div class="col-12">
+                <form asp-area="Admin" asp-controller="GiaoVien" asp-action="Edit" method="post" enctype="multipart/form-data" class="card">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" name="TeacherId" value="@Model.TeacherId" />
+                    <input type="hidden" name="UserId" value="@Model.UserId" />
+
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-4 text-center">
+                                @{
+                                    var rawImg = Model?.AnhDaiDien ?? "";
+                                    string imgSrc;
+                                    if (string.IsNullOrWhiteSpace(rawImg))
+                                    {
+                                        imgSrc = Url.Content("~/images/no-avatar.png");
+                                    }
+                                    else if (rawImg.StartsWith("http", StringComparison.OrdinalIgnoreCase))
+                                    {
+                                        imgSrc = rawImg;
+                                    }
+                                    else
+                                    {
+                                        imgSrc = Url.Content(rawImg.Replace("\\", "/").Trim());
+                                    }
+                                }
+                                <img id="avatarPreview" src="@imgSrc"
+                                     onerror="this.onerror=null;this.src='@Url.Content("~/images/no-avatar.png")'"
+                                     alt="@(Model?.User?.FullName ?? Model?.Email ?? "Giáo viên")"
+                                     class="img-fluid rounded mb-3" />
+
+                                <!-- file input (bật khi bật chế độ chỉnh sửa) -->
+                                <div class="mb-2">
+                                    <label class="form-label">Ảnh đại diện</label>
+                                    <input id="AnhDaiDienFile" type="file" name="AnhDaiDienFile" accept="image/*" class="form-control editable" disabled onchange="previewAvatar(this)" />
+                                </div>
+
+                                <div class="mb-2">
+                                    <label class="form-label">Họ và tên</label>
+                                    <input class="form-control editable" name="UserFullName" value="@Model?.User?.FullName " disabled />
+                                </div>
+                                <div class="mb-2">
+                                    <label class="form-label">Nơi công tác</label>
+                                    <input class="form-control editable" name="NoiCongTac" value="@Model?.NoiCongTac" disabled />
+                                </div>
+                                <div class="mb-2">
+                                    <label class="form-label">Học vị/Chuyên môn</label>
+                                    <input class="form-control editable" name="HocVi" value="@Model?.HocVi" disabled />
+                                </div>
+                                <div class="mb-2">
+                                    <label class="form-label">Email</label>
+                                    <input class="form-control editable" name="Email" value="@(!string.IsNullOrEmpty(Model?.Email) ? Model.Email : Model?.User?.Email)" disabled />
+                                </div>
+                            </div>
+
+                            <div class="col-md-8">
+                                <h5>Thông tin chung</h5>
+                                <dl class="row">
+                                    <dt class="col-sm-3">TeacherId</dt>
+                                    <dd class="col-sm-9">@Model?.TeacherId</dd>
+
+                                    <dt class="col-sm-3">UserId</dt>
+                                    <dd class="col-sm-9">@Model?.UserId</dd>
+
+                                    <dt class="col-sm-3">Số điện thoại</dt>
+                                    <dd class="col-sm-9">@Model?.User?.Phone</dd>
+
+                                    <dt class="col-sm-3">Trạng thái</dt>
+                                    <dd class="col-sm-9">@(Model?.User != null ? (Model.User.IsActive == false ? "Inactive" : "Active") : "Unknown")</dd>
+                                </dl>
+
+                                <h5 class="mt-4">Giới thiệu</h5>
+                                <div class="mb-3">
+                                    <textarea class="form-control editable" name="GioiThieu" rows="6" disabled>@Model?.GioiThieu</textarea>
+                                </div>
+
+                                <div class="mt-4">
+                                    <button id="saveBtn" type="submit" class="btn btn-success" style="display:none">
+                                        <i class="bi bi-save"></i> Lưu thay đổi
+                                    </button>
+                                    <button id="cancelBtn" type="button" class="btn btn-secondary" style="display:none" onclick="location.reload()">
+                                        Hủy
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+</main>
+
+@section Scripts {
+    <script>
+        function enableEdit() {
+            document.querySelectorAll('.editable').forEach(function (el) {
+                el.removeAttribute('disabled');
+            });
+            document.getElementById('saveBtn').style.display = 'inline-block';
+            document.getElementById('cancelBtn').style.display = 'inline-block';
+            document.getElementById('editBtn').style.display = 'none';
+        }
+        function previewAvatar(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    document.getElementById('avatarPreview').src = e.target.result;
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
+}
