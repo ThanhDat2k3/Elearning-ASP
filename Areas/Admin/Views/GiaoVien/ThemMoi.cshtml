@@ -1,0 +1,93 @@
+@using Elearning.Areas.Admin.Models;
+@model Teacher
+
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<main id="main" class="main">
+    <div class="pagetitle">
+        <h2>Thêm giáo viên mới</h2>
+    </div>
+
+    <form asp-area="Admin" asp-controller="Teacher" asp-action="Create" method="post" enctype="multipart/form-data">
+
+        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+        <section class="section dashboard">
+            <div class="row">
+
+                <div class="col-lg-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">1. Thông tin tài khoản (Bảng User)</h5>
+
+                            <div class="mb-3">
+                                <label asp-for="User.FullName" class="form-label">Họ và tên</label>
+                                <input asp-for="User.FullName" class="form-control" />
+                                <span asp-validation-for="User.FullName" class="text-danger"></span>
+                            </div>
+
+                            <div class="mb-3">
+                                <label asp-for="User.Email" class="form-label">Email đăng nhập</label>
+                                <input asp-for="User.Email" class="form-control" />
+                                <span asp-validation-for="User.Email" class="text-danger"></span>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Mật khẩu</label>
+                                <input name="password" type="password" class="form-control" />
+                                </div>
+
+                            <div class="mb-3">
+                                <label asp-for="User.Phone" class="form-label">Số điện thoại</label>
+                                <input asp-for="User.Phone" class="form-control" />
+                                <span asp-validation-for="User.Phone" class="text-danger"></span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">2. Thông tin chi tiết (Bảng Teacher)</h5>
+
+                            <div class="mb-3">
+                                <label asp-for="ChuyenMon" class="form-label">Chuyên môn</label>
+                                <input asp-for="ChuyenMon" class="form-control" />
+                                <span asp-validation-for="ChuyenMon" class="text-danger"></span>
+                            </div>
+
+                            <div class="mb-3">
+                                <label asp-for="HocVi" class="form-label">Học vị</label>
+                                <input asp-for="HocVi" class="form-control" />
+                                <span asp-validation-for="HocVi" class="text-danger"></span>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label asp-for="Email" class="form-label">Email liên hệ (cá nhân)</label>
+                                <input asp-for="Email" class="form-control" />
+                                <span asp-validation-for="Email" class="text-danger"></span>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label">Ảnh đại diện</label>
+                                <input name="avatarFile" class="form-control" type="file" />
+                            </div>
+
+                             </div>
+                    </div>
+                </div>
+
+                <div class="col-12 text-end">
+                    <button type="submit" class="btn btn-primary">Lưu lại</button>
+                    <a asp-area="Admin" asp-controller="Teacher" asp-action="Index" class="btn btn-secondary">Hủy</a>
+                </div>
+
+            </div>
+        </section>
+
+    </form>
+</main>
