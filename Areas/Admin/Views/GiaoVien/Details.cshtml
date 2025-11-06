@@ -36,7 +36,7 @@
                         <div class="row">
                             <div class="col-md-4 text-center">
                                 @{
-                                    var rawImg = Model?.AnhDaiDien ?? "";
+                                    var rawImg = Model?.AnhDaiDien ;
                                     string imgSrc;
                                     if (string.IsNullOrWhiteSpace(rawImg))
                                     {
@@ -53,10 +53,9 @@
                                 }
                                 <img id="avatarPreview" src="@imgSrc"
                                      onerror="this.onerror=null;this.src='@Url.Content("~/images/no-avatar.png")'"
-                                     alt="@(Model?.User?.FullName ?? Model?.Email ?? "Giáo viên")"
+                                     alt="@(Model?.User?.FullName ?? "Giáo viên")"
                                      class="img-fluid rounded mb-3" />
 
-                                <!-- file input (bật khi bật chế độ chỉnh sửa) -->
                                 <div class="mb-2">
                                     <label class="form-label">Ảnh đại diện</label>
                                     <input id="AnhDaiDienFile" type="file" name="AnhDaiDienFile" accept="image/*" class="form-control editable" disabled onchange="previewAvatar(this)" />
@@ -64,19 +63,27 @@
 
                                 <div class="mb-2">
                                     <label class="form-label">Họ và tên</label>
-                                    <input class="form-control editable" name="UserFullName" value="@Model?.User?.FullName " disabled />
+                                    <input class="form-control editable" name="UserFullName" value="@Model?.User?.FullName" disabled />
                                 </div>
+
+                                <div class="mb-2">
+                                    <label class="form-label">Email</label>
+                                    <input class="form-control editable" name="Email" value="@(!string.IsNullOrEmpty(Model?.Email) ? Model.Email : Model?.User?.Email)" disabled />
+                                </div>
+
+                                <div class="mb-2">
+                                    <label class="form-label">Số điện thoại</label>
+                                    <input class="form-control editable" name="Phone" value="@Model?.User?.Phone" disabled />
+                                </div>
+
                                 <div class="mb-2">
                                     <label class="form-label">Nơi công tác</label>
                                     <input class="form-control editable" name="NoiCongTac" value="@Model?.NoiCongTac" disabled />
                                 </div>
+
                                 <div class="mb-2">
                                     <label class="form-label">Học vị/Chuyên môn</label>
                                     <input class="form-control editable" name="HocVi" value="@Model?.HocVi" disabled />
-                                </div>
-                                <div class="mb-2">
-                                    <label class="form-label">Email</label>
-                                    <input class="form-control editable" name="Email" value="@(!string.IsNullOrEmpty(Model?.Email) ? Model.Email : Model?.User?.Email)" disabled />
                                 </div>
                             </div>
 
@@ -88,9 +95,6 @@
 
                                     <dt class="col-sm-3">UserId</dt>
                                     <dd class="col-sm-9">@Model?.UserId</dd>
-
-                                    <dt class="col-sm-3">Số điện thoại</dt>
-                                    <dd class="col-sm-9">@Model?.User?.Phone</dd>
 
                                     <dt class="col-sm-3">Trạng thái</dt>
                                     <dd class="col-sm-9">@(Model?.User != null ? (Model.User.IsActive == false ? "Inactive" : "Active") : "Unknown")</dd>

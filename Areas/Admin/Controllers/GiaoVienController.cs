@@ -5,10 +5,10 @@ using System.Threading.Tasks;
 using Elearning.Areas.Admin.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Elearning.Utilities;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Hosting;
 using System.IO;
+using Elearning.Utilities;
 
 namespace Elearning.Areas.Admin.Controllers
 {
@@ -72,7 +72,7 @@ namespace Elearning.Areas.Admin.Controllers
                                   .FirstOrDefault(t => t.TeacherId == id);
             if (teacher == null) return NotFound();
 
-            var userName = teacher.User != null ? teacher.User.FullName : teacher.Email ?? "";
+            var userName = teacher.User != null ? teacher.User.FullName : teacher.Email ;
             var expectedSlug = Functions.GiaoVienSlugGeneration("gv", id, userName);
 
             if (string.IsNullOrEmpty(slug) || !slug.Equals(expectedSlug, StringComparison.OrdinalIgnoreCase))
@@ -85,15 +85,24 @@ namespace Elearning.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(long TeacherId, IFormFile? AnhDaiDienFile)
+        public IActionResult Edit(long TeacherId,
+                                  string UserFullName,
+                                  string Email,
+                                  string? Phone,
+                                  IFormFile? AnhDaiDienFile,
+                                  string? HocVi,
+                                  string? NoiCongTac,
+                                  string? GioiThieu)
         {
-            var teacher = _context.Teachers.Include(t => t.User).FirstOrDefault(t => t.TeacherId == TeacherId);
+            var teacher = _context.Teachers
+                                  .Include(t => t.User)
+                                  .FirstOrDefault(t => t.TeacherId == TeacherId);
             if (teacher == null) return NotFound();
 
-            // xử lý file upload nếu có
-            if (AnhDaiDienFile != null && AnhDaiDienFile.Length > 0)
+            // xử lý file upload
+            if (AnhDaiDienFile != null && AnhDaiDienFile.Length > 0 && _env != null)
             {
-                var uploadsFolder = Path.Combine(_env.WebRootPath, "uploads", "teachers");
+                var uploadsFolder = Path.Combine(_env.WebRootPath ?? "wwwroot", "uploads", "teachers");
                 Directory.CreateDirectory(uploadsFolder);
                 var ext = Path.GetExtension(AnhDaiDienFile.FileName);
                 var fileName = $"teacher_{TeacherId}_{DateTime.UtcNow.Ticks}{ext}";
@@ -106,31 +115,35 @@ namespace Elearning.Areas.Admin.Controllers
                 teacher.AnhDaiDien = $"/uploads/teachers/{fileName}";
             }
 
-            // Lấy các trường khác từ form
-            var form = Request.Form;
-            teacher.NoiCongTac = form["NoiCongTac"];
-            teacher.HocVi = form["HocVi"];
-            teacher.GioiThieu = form["GioiThieu"];
-            teacher.Email = form["Email"];
-            // nếu muốn cập nhật ảnh từ input text (không khuyến nghị), có thể đọc form["AnhDaiDien"]
+            // cập nhật Teacher
+            teacher.HocVi = HocVi;
+            teacher.NoiCongTac = NoiCongTac;
+            teacher.GioiThieu = GioiThieu;
+            // Teacher.Email tồn tại trong model trước đó, cập nhật nếu cần
+            teacher.Email = Email;
 
+            // cập nhật User (không cho sửa UserId)
             if (teacher.User != null)
             {
-                var newFullName = form["UserFullName"].ToString();
-                if (!string.IsNullOrWhiteSpace(newFullName))
-                {
-                    teacher.User.FullName = newFullName;
-                    _context.Update(teacher.User);
-                }
+                if (!string.IsNullOrWhiteSpace(UserFullName))
+                    teacher.User.FullName = UserFullName;
+
+                if (!string.IsNullOrWhiteSpace(Email))
+                    teacher.User.Email = Email;
+
+                teacher.User.Phone = Phone;
+                _context.Update(teacher.User);
             }
 
             _context.Update(teacher);
             _context.SaveChanges();
 
-            var userName = teacher.User != null ? teacher.User.FullName : teacher.Email ?? "";
+            // redirect về chi tiết với slug đúng
+            var userName = teacher.User != null ? teacher.User.FullName : teacher.Email ?? $"gv-{teacher.TeacherId}";
             var slug = Functions.GiaoVienSlugGeneration("gv", teacher.TeacherId, userName);
 
-            return Redirect($"/Admin/GiaoVien/Details/{teacher.TeacherId}/{slug}");
+            // Redirect về action Details trong Admin area
+            return RedirectToAction("Details", "GiaoVien", new { area = "Admin", id = teacher.TeacherId, slug = slug });
         }
     }
 }

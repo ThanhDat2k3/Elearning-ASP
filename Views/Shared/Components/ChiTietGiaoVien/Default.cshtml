@@ -1,28 +1,33 @@
 @using Elearning.Areas.Admin.Models;
 @using Elearning.Utilities;
 @model IList<vwTeacherInfo>
+
 <ul class="gv-list clearfix">
     @{
-        var gv=Model.Take(8).ToList();
+        var gv = Model.Take(8).ToList();
         foreach (var i in gv)
         {
-            string url= Functions.GiaoVienSlugGeneration("gv",i.TeacherId,i.TenGiangVien);
+            // Tạo link thông qua route name để đảm bảo dạng /gv-{id}-{slug}.html
+            var link = Url.RouteUrl("ChiTietGiaoVien", new { id = i.TeacherId, slug = Functions.Slugify(i.TenGiangVien) });
+            // anhr fallback nếu rỗng
+            var imgSrc = string.IsNullOrWhiteSpace(i.AnhDaiDien) ? Url.Content("~/images/no-avatar.png") : Url.Content(i.AnhDaiDien.Replace("\\", "/"));
              <li class="gv-item-wr">
                 <div class="gv-item">
-                    <div class="gv-image"><a href="/@url" target="_blank"><img src="@i.AnhDaiDien" alt="@i.TenGiangVien"/></a></div>
+                    <div class="gv-image">
+                        <a href="@link" target="_blank">
+                            <img src="@imgSrc" alt="@i.TenGiangVien" />
+                        </a>
+                    </div>
                     <div class="gv-caption">
-                        <p class="gv-name"><a href="/@url" target="_blank">@i.TenGiangVien</a></p>
+                        <p class="gv-name"><a href="@link" target="_blank">@i.TenGiangVien</a></p>
                         <p class="gv-school">@i.NoiCongTac</p>
                         <div class="gv-desc">
                             <p style="text-align:justify">@i.GioiThieu</p>
                         </div>
                     </div>
-                    <div class="gv-viewmore"><a href="/@url" target="_blank">Chi tiết</a></div>
+                    <div class="gv-viewmore"><a href="@link" target="_blank">Chi tiết</a></div>
                 </div>
             </li>
         }
     }
-   
-    
-                        
 </ul>
