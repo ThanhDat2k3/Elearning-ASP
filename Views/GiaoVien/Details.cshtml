@@ -1,0 +1,120 @@
+@using Elearning.Models
+@using Elearning.Utilities
+@model IList<Elearning.Models.vwTeacherInfo>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var item = (Model != null && Model.Count > 0) ? Model.First() : null;
+    if (item == null)
+    {
+        <text>Không tìm thấy giáo viên.</text>
+        return;
+    }
+
+    var displayName = !string.IsNullOrWhiteSpace(item.TenGiangVien) ? item.TenGiangVien : (item.EmailRieng ?? item.EmailHeThong ?? "Giáo viên");
+    var rawImg = item?.AnhDaiDien ?? "";
+    string imgSrc;
+    if (string.IsNullOrWhiteSpace(rawImg))
+    {
+        imgSrc = Url.Content("~/images/no-avatar.png");
+    }
+    else if (rawImg.StartsWith("http", StringComparison.OrdinalIgnoreCase))
+    {
+        imgSrc = rawImg;
+    }
+    else
+    {
+        imgSrc = Url.Content(rawImg.Replace("\\", "/").Trim());
+    }
+
+    ViewData["Title"] = displayName + " - Chi tiết giáo viên";
+}
+
+<main id="main" class="main">
+    <div class="pagetitle">
+        <h2>@displayName</h2>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+                <li class="breadcrumb-item"><a asp-controller="GiaoVien" asp-action="Index">Giáo viên</a></li>
+                <li class="breadcrumb-item active">@displayName</li>
+            </ol>
+        </nav>
+    </div>
+
+    <section class="section">
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <img src="@imgSrc" alt="@displayName" class="img-fluid rounded mb-3" onerror="this.onerror=null;this.src='@Url.Content("~/images/no-avatar.png")'" />
+                        <h3>@displayName</h3>
+                        <p class="text-muted">@item?.NoiCongTac</p>
+                        <p>@(!string.IsNullOrWhiteSpace(item?.HocVi) ? item.HocVi : item?.ChuyenMon)</p>
+                        <div class="d-grid gap-2 mt-3">
+                            <a asp-controller="GiaoVien" asp-action="Index" class="btn btn-secondary">Danh sách</a>
+                            <a asp-area="Admin" asp-controller="GiaoVien" asp-action="Delete" asp-route-id="@item?.TeacherID" class="btn btn-danger">Vô hiệu hóa</a>
+                            <a asp-area="Admin" asp-controller="GiaoVien" asp-action="ThemMoi" asp-route-id="@item?.TeacherID" class="btn btn-primary">Chỉnh sửa</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-8">
+                <div class="card">
+                    <div class="card-body">
+                        <h4>Giới thiệu</h4>
+                        @if (!string.IsNullOrWhiteSpace(item?.GioiThieu))
+                        {
+                            <div class="mb-3" style="text-align:justify">@Html.Raw(item.GioiThieu)</div>
+                        }
+                        else
+                        {
+                            <p class="text-muted">Chưa có thông tin giới thiệu.</p>
+                        }
+
+                        <hr />
+                        <h5>Thông tin chi tiết</h5>
+                        <dl class="row">
+                            <dt class="col-sm-3">TeacherId</dt>
+                            <dd class="col-sm-9">@item?.TeacherID</dd>
+
+                            <dt class="col-sm-3">UserId</dt>
+                            <dd class="col-sm-9">@item?.UserID</dd>
+
+                            <dt class="col-sm-3">Email</dt>
+                            <dd class="col-sm-9">@(!string.IsNullOrWhiteSpace(item?.EmailRieng) ? item.EmailRieng : item?.EmailHeThong ?? "-")</dd>
+
+                            <dt class="col-sm-3">Số điện thoại</dt>
+                            <dd class="col-sm-9">@item?.SoDienThoai ?? "-"</dd>
+
+                            <dt class="col-sm-3">Chuyên môn</dt>
+                            <dd class="col-sm-9">@item?.ChuyenMon ?? "-"</dd>
+
+                            <dt class="col-sm-3">Nơi công tác</dt>
+                            <dd class="col-sm-9">@item?.NoiCongTac ?? "-"</dd>
+
+                            <dt class="col-sm-3">Học vị</dt>
+                            <dd class="col-sm-9">@item?.HocVi ?? "-"</dd>
+
+                            <dt class="col-sm-3">Trạng thái</dt>
+                            <dd class="col-sm-9">@(item?.IsActive == false ? "Inactive" : "Active")</dd>
+                        </dl>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+@section Scripts {
+    <script>
+        // small helper: open image in new tab on click
+        document.querySelectorAll('.card-body img').forEach(function (img) {
+            img && img.addEventListener('click', function () {
+                window.open(img.src, '_blank');
+            });
+        });
+    </script>
+}

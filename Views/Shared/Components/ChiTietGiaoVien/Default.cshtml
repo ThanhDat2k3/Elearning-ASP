@@ -4,13 +4,14 @@
 
 <ul class="gv-list clearfix">
     @{
-        var gv = Model.Take(8).ToList();
+        var gv = Model?.Take(8).ToList() ?? new List<vwTeacherInfo>();
         foreach (var i in gv)
         {
-            // Tạo link thông qua route name để đảm bảo dạng /gv-{id}-{slug}.html
-            var link = Url.RouteUrl("ChiTietGiaoVien", new { id = i.TeacherId, slug = Functions.Slugify(i.TenGiangVien) });
-            // anhr fallback nếu rỗng
+            var name = string.IsNullOrWhiteSpace(i.TenGiangVien) ? "NoName" : i.TenGiangVien;
+            
+            var link = $"/GiaoVien/Details/{i.TeacherId}/{name}";
             var imgSrc = string.IsNullOrWhiteSpace(i.AnhDaiDien) ? Url.Content("~/images/no-avatar.png") : Url.Content(i.AnhDaiDien.Replace("\\", "/"));
+           
              <li class="gv-item-wr">
                 <div class="gv-item">
                     <div class="gv-image">

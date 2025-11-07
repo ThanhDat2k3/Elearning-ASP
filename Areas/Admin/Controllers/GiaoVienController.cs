@@ -1,13 +1,7 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Elearning.Areas.Admin.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Hosting;
-using System.IO;
 using Elearning.Utilities;
 
 namespace Elearning.Areas.Admin.Controllers
@@ -16,11 +10,11 @@ namespace Elearning.Areas.Admin.Controllers
     public class GiaoVienController: Controller
     {
         private readonly DataContext _context;
-        private readonly IWebHostEnvironment _env;
-        public GiaoVienController(DataContext context, IWebHostEnvironment env)
+        private readonly ILogger<GiaoVienController> _logger;
+        public GiaoVienController(DataContext context, ILogger<GiaoVienController> logger)
         {
             _context = context;
-            _env = env;
+            _logger = logger;
         }
 
         public IActionResult ThemMoi()
@@ -49,7 +43,7 @@ namespace Elearning.Areas.Admin.Controllers
             user.IsActive = false;
             _context.Update(user);
             _context.SaveChanges();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("Index");
         }
 
         public IActionResult Index()
@@ -63,6 +57,26 @@ namespace Elearning.Areas.Admin.Controllers
             return View(teachers);
         }
 
+        [HttpGet]
+        public IActionResult ToggleActive(int id)
+        {
+            var teacher = _context.Teachers
+                                  .Include(t => t.User)
+                                  .FirstOrDefault(t => t.TeacherId == id);
+            if (teacher == null) return NotFound();
+            if (teacher.User == null) return NotFound();
+            if (teacher.User.IsActive == true)
+                teacher.User.IsActive = false;
+            else
+                teacher.User.IsActive = true;
+            _context.Update(teacher.User);
+            _context.SaveChanges();
+
+            var userName = teacher.User.FullName;
+            var slug = Functions.GiaoVienSlugGeneration("gv", teacher.TeacherId, userName);
+
+            return RedirectToAction("Details", "GiaoVien", new { area = "Admin", id = teacher.TeacherId, slug = slug });
+        }
 
         [HttpGet("/Admin/GiaoVien/Details/{id}/{slug?}")]
         public IActionResult Details(long id, string? slug)
@@ -72,37 +86,33 @@ namespace Elearning.Areas.Admin.Controllers
                                   .FirstOrDefault(t => t.TeacherId == id);
             if (teacher == null) return NotFound();
 
-            var userName = teacher.User != null ? teacher.User.FullName : teacher.Email ;
-            var expectedSlug = Functions.GiaoVienSlugGeneration("gv", id, userName);
-
-            if (string.IsNullOrEmpty(slug) || !slug.Equals(expectedSlug, StringComparison.OrdinalIgnoreCase))
-            {
-                return Redirect($"/Admin/GiaoVien/Details/{id}/{expectedSlug}");
-            }
-
+            var userName = teacher.User.FullName;
+            var Slug = Functions.GiaoVienSlugGeneration("gv", id, userName);
             return View(teacher);
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Edit(long TeacherId,
-                                  string UserFullName,
-                                  string Email,
-                                  string? Phone,
-                                  IFormFile? AnhDaiDienFile,
-                                  string? HocVi,
-                                  string? NoiCongTac,
-                                  string? GioiThieu)
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public IActionResult Edit(long TeacherId,
+                  string UserFullName,
+                  string EmailPrivate,
+                  string LoginEmail,
+                  string? Phone,
+                  IFormFile? AnhDaiDienFile,
+                  string? HocVi,
+                  string? NoiCongTac,
+                  string? GioiThieu)
         {
             var teacher = _context.Teachers
                                   .Include(t => t.User)
                                   .FirstOrDefault(t => t.TeacherId == TeacherId);
             if (teacher == null) return NotFound();
 
-            // xử lý file upload
-            if (AnhDaiDienFile != null && AnhDaiDienFile.Length > 0 && _env != null)
+
+            if (AnhDaiDienFile != null && AnhDaiDienFile.Length > 0)
             {
-                var uploadsFolder = Path.Combine(_env.WebRootPath ?? "wwwroot", "uploads", "teachers");
+                var webRoot = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot");
+                var uploadsFolder = Path.Combine(webRoot, "uploads", "teachers");
                 Directory.CreateDirectory(uploadsFolder);
                 var ext = Path.GetExtension(AnhDaiDienFile.FileName);
                 var fileName = $"teacher_{TeacherId}_{DateTime.UtcNow.Ticks}{ext}";
@@ -111,25 +121,21 @@ namespace Elearning.Areas.Admin.Controllers
                 {
                     AnhDaiDienFile.CopyTo(fs);
                 }
-                // lưu đường dẫn tương đối để hiển thị
+
                 teacher.AnhDaiDien = $"/uploads/teachers/{fileName}";
             }
 
-            // cập nhật Teacher
             teacher.HocVi = HocVi;
             teacher.NoiCongTac = NoiCongTac;
             teacher.GioiThieu = GioiThieu;
-            // Teacher.Email tồn tại trong model trước đó, cập nhật nếu cần
-            teacher.Email = Email;
+            teacher.Email = EmailPrivate;
 
-            // cập nhật User (không cho sửa UserId)
             if (teacher.User != null)
             {
                 if (!string.IsNullOrWhiteSpace(UserFullName))
                     teacher.User.FullName = UserFullName;
-
-                if (!string.IsNullOrWhiteSpace(Email))
-                    teacher.User.Email = Email;
+                if (!string.IsNullOrWhiteSpace(LoginEmail))
+                    teacher.User.Email = LoginEmail;
 
                 teacher.User.Phone = Phone;
                 _context.Update(teacher.User);
@@ -137,12 +143,13 @@ namespace Elearning.Areas.Admin.Controllers
 
             _context.Update(teacher);
             _context.SaveChanges();
-
-            // redirect về chi tiết với slug đúng
-            var userName = teacher.User != null ? teacher.User.FullName : teacher.Email ?? $"gv-{teacher.TeacherId}";
+            string userName;
+            if (teacher.User != null)
+                userName = teacher.User.FullName;
+            else
+                userName = "NoName";
             var slug = Functions.GiaoVienSlugGeneration("gv", teacher.TeacherId, userName);
 
-            // Redirect về action Details trong Admin area
             return RedirectToAction("Details", "GiaoVien", new { area = "Admin", id = teacher.TeacherId, slug = slug });
         }
     }
