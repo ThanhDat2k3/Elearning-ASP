@@ -54,7 +54,7 @@
                         <div class="d-grid gap-2 mt-3">
                             <a asp-controller="GiaoVien" asp-action="Index" class="btn btn-secondary">Danh sách</a>
                             <a asp-area="Admin" asp-controller="GiaoVien" asp-action="Delete" asp-route-id="@item?.TeacherID" class="btn btn-danger">Vô hiệu hóa</a>
-                            <a asp-area="Admin" asp-controller="GiaoVien" asp-action="ThemMoi" asp-route-id="@item?.TeacherID" class="btn btn-primary">Chỉnh sửa</a>
+                            <a asp-area="Admin" asp-controller="GiaoVien" asp-action="Create" asp-route-id="@item?.TeacherID" class="btn btn-primary">Chỉnh sửa</a>
                         </div>
                     </div>
                 </div>

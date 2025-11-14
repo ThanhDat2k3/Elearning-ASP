@@ -10,7 +10,7 @@
         <h2>Thêm giáo viên mới</h2>
     </div>
 
-    <form asp-area="Admin" asp-controller="Teacher" asp-action="Create" method="post" enctype="multipart/form-data">
+    <form asp-area="Admin" asp-controller="GiaoVien" asp-action="CreateConfirm" method="post" enctype="multipart/form-data">
 
         <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
 
@@ -74,7 +74,7 @@
                             
                             <div class="mb-3">
                                 <label class="form-label">Ảnh đại diện</label>
-                                <input name="avatarFile" class="form-control" type="file" />
+                                <input name="AnhDaiDienFile" class="form-control" type="file" />
                             </div>
 
                              </div>
@@ -83,7 +83,7 @@
 
                 <div class="col-12 text-end">
                     <button type="submit" class="btn btn-primary">Lưu lại</button>
-                    <a asp-area="Admin" asp-controller="Teacher" asp-action="Index" class="btn btn-secondary">Hủy</a>
+                    <a asp-area="Admin" asp-controller="GiaoVien" asp-action="Index" class="btn btn-secondary">Hủy</a>
                 </div>
 
             </div>
@@ -91,3 +91,7 @@
 
     </form>
 </main>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

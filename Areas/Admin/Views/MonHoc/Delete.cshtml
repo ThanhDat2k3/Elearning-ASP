@@ -1,0 +1,46 @@
+@using Elearning.Areas.Admin.Models
+@model Subject
+
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<main id="main" class="main">
+    <div class="pagetitle">
+        <h2>Xác nhận xóa môn học</h2>
+    </div>
+
+    <section class="section">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title text-danger">Bạn có chắc muốn xóa môn học này?</h5>
+                        <p class="text-muted">Hành động này sẽ xóa bản ghi môn học khỏi cơ sở dữ liệu.</p>
+
+                        <dl class="row mb-3">
+                            <dt class="col-sm-3">SubjectId</dt>
+                            <dd class="col-sm-9">@Model.SubjectId</dd>
+
+                            <dt class="col-sm-3">Tên môn học</dt>
+                            <dd class="col-sm-9">@Model.SubjectName</dd>
+
+                            <dt class="col-sm-3">Mô tả</dt>
+                            <dd class="col-sm-9">@Model.Description</dd>
+                        </dl>
+
+                        <form asp-area="Admin" asp-controller="MonHoc" asp-action="DeleteConfirmed" method="post">
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="id" value="@Model.SubjectId" />
+                            <div class="d-flex">
+                                <button type="submit" class="btn btn-danger me-2">Xác nhận xóa</button>
+                                <a asp-area="Admin" asp-controller="MonHoc" asp-action="Index" class="btn btn-secondary">Hủy và quay lại</a>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>

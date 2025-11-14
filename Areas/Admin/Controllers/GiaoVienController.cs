@@ -17,10 +17,48 @@ namespace Elearning.Areas.Admin.Controllers
             _logger = logger;
         }
 
-        public IActionResult ThemMoi()
+        public IActionResult Create()
         {
             var teacher = new Teacher();
             return View(teacher);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult CreateConfirm(Teacher teacher, IFormFile? AnhDaiDienFile)
+        {
+            if (teacher == null) return BadRequest();
+
+            if (!ModelState.IsValid)
+            {
+                // return the Create view so validation messages show
+                return View("Create", teacher);
+            }
+
+            _context.Teachers.Add(teacher);
+            _context.SaveChanges();
+
+            if (AnhDaiDienFile != null && AnhDaiDienFile.Length > 0)
+            {
+                var webRoot = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot");
+                var uploadsFolder = Path.Combine(webRoot, "uploads", "teachers");
+                Directory.CreateDirectory(uploadsFolder);
+                var ext = Path.GetExtension(AnhDaiDienFile.FileName);
+                var fileName = $"teacher_{teacher.TeacherId}_{DateTime.UtcNow.Ticks}{ext}";
+                var filePath = Path.Combine(uploadsFolder, fileName);
+                using (var fs = new FileStream(filePath, FileMode.Create))
+                {
+                    AnhDaiDienFile.CopyTo(fs);
+                }
+
+                teacher.AnhDaiDien = $"/uploads/teachers/{fileName}";
+                _context.Update(teacher);
+                _context.SaveChanges();
+            }
+
+            var userName = teacher.User != null ? teacher.User.FullName : (teacher.Email ?? "NoName");
+            var slug = Functions.GiaoVienSlugGeneration("gv", teacher.TeacherId, userName);
+            return RedirectToAction("Details", "GiaoVien", new { area = "Admin", id = teacher.TeacherId, slug = slug });
         }
 
         public IActionResult Delete(int? id)

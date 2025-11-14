@@ -1,0 +1,59 @@
+@using Elearning.Areas.Admin.Models
+@model IEnumerable<Subject>
+
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<main id="main" class="main">
+    <div class="pagetitle">
+        <h2>Danh sách môn học</h2>
+    </div>
+
+    <p>
+        <a type="button" class="btn btn-success" asp-area="Admin" asp-controller="MonHoc" asp-action="Create">
+            <i class="bi bi-plus-lg me-1"></i>Thêm môn học
+        </a>
+    </p>
+
+    <section class="section dashboard">
+        <div class="row">
+            <div class="col-12">
+                <div class="card recent-sales overflow-auto">
+                    <div class="card-body mt-4">
+                        <table class="table table-borderless datatable">
+                            <thead>
+                                <tr>
+                                    <th class="col-1 text-center">#</th>
+                                    <th class="col-6 text-left">Tên môn học</th>
+                                    <th class="col-4 text-left">Mô tả</th>
+                                    <th class="col-1 text-center">Chức năng</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model != null)
+                                {
+                                    foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td class="text-center">@item.SubjectId</td>
+                                            <td class="text-left text-primary">
+                                                <a asp-area="Admin" asp-controller="MonHoc" asp-action="Details" asp-route-id="@item.SubjectId">
+                                                    @item.SubjectName
+                                                </a>
+                                            </td>
+                                            <td class="text-left">@item.Description</td>
+                                            <td class="text-center">
+                                                <a asp-area="Admin" asp-controller="MonHoc" asp-action="Delete" asp-route-id="@item.SubjectId" class="btn btn-danger btn-sm">Xóa</a>
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
